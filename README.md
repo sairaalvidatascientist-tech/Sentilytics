@@ -1,5 +1,3 @@
-# Sentilytics
-Sentilytics
 # Sentilytics - Real-Time Social Media Sentiment Intelligence
 
 ![Sentilytics Banner](https://img.shields.io/badge/Status-Live-success?style=for-the-badge&logo=activity)

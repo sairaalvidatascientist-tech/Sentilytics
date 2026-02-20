@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroPredict Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-sidebar {
+            width: 250px;
+            background: #2d5a27;
+            color: white;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .admin-content {
+            flex: 1;
+            padding: 3rem;
+            background: #fff;
+        }
+
+        .admin-nav-item {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .admin-nav-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .card {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border: 1px solid #eee;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body style="display: flex;">
+    <div class="admin-sidebar">
+        <h2 style="margin-bottom: 2rem; font-size: 1.2rem;">AgroPredict Admin</h2>
+        <div class="admin-nav-item" onclick="showSection('settings')">Platform Identity</div>
+        <div class="admin-nav-item" onclick="showSection('contributors')">Contributors Panel</div>
+        <div class="admin-nav-item" onclick="showSection('variables')">Input Variables</div>
+        <div class="admin-nav-item" onclick="showSection('models')">ML Model Library</div>
+        <div class="admin-nav-item" style="margin-top: 2rem; color: #ffab91;"
+            onclick="window.location.href='index.html'">View Website</div>
+    </div>
+
+    <div class="admin-content">
+        <!-- Settings Section -->
+        <section id="sec-settings">
+            <h3>Platform Identity Settings</h3>
+            <div class="card">
+                <div class="input-group">
+                    <label>Platform Name</label>
+                    <input type="text" id="set-platform-name">
+                </div>
+                <div class="input-group">
+                    <label>Institutional Host</label>
+                    <input type="text" id="set-host">
+                </div>
+                <div class="input-group">
+                    <label>Department</label>
+                    <input type="text" id="set-dept">
+                </div>
+                <button class="btn btn-primary" onclick="saveSettings()">Save Changes</button>
+            </div>
+        </section>
+
+        <!-- Contributors Section -->
+        <section id="sec-contributors" style="display: none;">
+            <h3>Manage Contributors</h3>
+            <div class="card">
+                <table id="admin-contributors-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Link</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <button class="btn btn-primary" style="margin-top: 1rem;" onclick="addContributor()">Add New
+                    Contributor</button>
+            </div>
+        </section>
+
+        <!-- Variables Section -->
+        <section id="sec-variables" style="display: none;">
+            <h3>Input Variable Management</h3>
+            <div class="card">
+                <table id="admin-variables-table">
+                    <thead>
+                        <tr>
+                            <th>Variable Name</th>
+                            <th>Category</th>
+                            <th>Unit</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <button class="btn btn-primary" style="margin-top: 1rem;" onclick="addVariable()">Add Custom
+                    Variable</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+
+</html>

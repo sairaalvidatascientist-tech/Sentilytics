@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentilytics - Real-Time Social Media Sentiment Analysis</title>
+    <meta name="description"
+        content="Transform social media conversations into actionable insights with real-time sentiment analysis">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+    <!-- Startup Popup -->
+    <div id="startupPopup" class="popup-overlay">
+        <div class="popup-content">
+            <div class="popup-header">
+                <div class="university-logo">
+                    <div class="logo-circle">
+                        <span class="logo-text">UL</span>
+                    </div>
+                </div>
+                <h1 class="university-name">University of Layyah</h1>
+                <h2 class="department-name">Department of Computer Science</h2>
+            </div>
+            <div class="popup-body">
+                <div class="project-title">Sentilytics</div>
+                <div class="project-subtitle">Real-Time Social Media Sentiment Analysis Dashboard</div>
+                <div class="popup-animation">
+                    <div class="pulse-circle"></div>
+                    <div class="pulse-circle delay-1"></div>
+                    <div class="pulse-circle delay-2"></div>
+                </div>
+            </div>
+            <button id="closePopup" class="popup-button">Enter Dashboard</button>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="mainApp" class="main-app hidden">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+            </div>
+            <div class="header-center">
+                <h1 class="app-title">
+                    <span class="title-icon">📊</span>
+                    Sentilytics
+                </h1>
+                <p class="app-tagline">Real-Time Sentiment Intelligence</p>
+            </div>
+            <div class="header-right">
+                <button id="themeToggle" class="theme-toggle-btn" title="Toggle Light/Dark Mode">
+                    <span id="themeIcon">🌓</span>
+                </button>
+                <div class="developer-badge" style="text-align: right; margin-right: 15px;">
+                    <div class="developer-name" style="font-weight: bold; color: var(--primary-color);">Saira Alvi</div>
+                    <div class="developer-role" style="font-size: 0.8em; color: var(--text-muted);">Web Developer</div>
+                </div>
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Live</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Control Panel -->
+        <section class="control-panel">
+            <div class="container">
+                <div class="search-container">
+                    <input type="text" id="keywordInput" class="search-input"
+                        placeholder="Enter keyword to analyze (e.g., Tesla, Bitcoin, Climate Change)">
+                    <button id="analyzeBtn" class="analyze-button">
+                        <span class="button-icon">🔍</span>
+                        Analyze Sentiment
+                    </button>
+                </div>
+                <div class="quick-filters">
+                    <button class="filter-btn" data-keyword="Tesla">Tesla</button>
+                    <button class="filter-btn" data-keyword="Bitcoin">Bitcoin</button>
+                    <button class="filter-btn" data-keyword="Climate Change">Climate Change</button>
+                    <button class="filter-btn" data-keyword="AI Technology">AI Technology</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alert Banner -->
+        <div id="alertBanner" class="alert-banner hidden">
+            <div class="alert-content">
+                <span class="alert-icon">⚠️</span>
+                <span class="alert-message"></span>
+            </div>
+            <button class="alert-close">×</button>
+        </div>
+
+        <!-- Dashboard Grid -->
+        <main class="dashboard">
+            <div class="container">
+                <div class="dashboard-grid">
+                    <!-- Sentiment Distribution Card -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Sentiment Distribution</h3>
+                            <span class="card-badge">Live</span>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="sentimentPieChart"></canvas>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stat-item">
+                                <span class="stat-label">Total Posts</span>
+                                <span class="stat-value" id="totalPosts">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sentiment Trend Card -->
+                    <div class="dashboard-card wide">
+                        <div class="card-header">
+                            <h3 class="card-title">Sentiment Trend Over Time</h3>
+                            <div class="time-range">
+                                <button class="time-btn active" data-range="1h">1H</button>
+                                <button class="time-btn" data-range="6h">6H</button>
+                                <button class="time-btn" data-range="24h">24H</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="sentimentLineChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Keyword Frequency Card -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Top Keywords</h3>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="keywordBarChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Emotion Analysis Card -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Emotion Analysis</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="emotion-grid">
+                                <div class="emotion-item">
+                                    <span class="emotion-icon">😊</span>
+                                    <span class="emotion-label">Joy</span>
+                                    <div class="emotion-bar">
+                                        <div class="emotion-fill" id="joyBar" style="width: 0%"></div>
+                                    </div>
+                                    <span class="emotion-value" id="joyValue">0%</span>
+                                </div>
+                                <div class="emotion-item">
+                                    <span class="emotion-icon">😠</span>
+                                    <span class="emotion-label">Anger</span>
+                                    <div class="emotion-bar">
+                                        <div class="emotion-fill anger" id="angerBar" style="width: 0%"></div>
+                                    </div>
+                                    <span class="emotion-value" id="angerValue">0%</span>
+                                </div>
+                                <div class="emotion-item">
+                                    <span class="emotion-icon">😨</span>
+                                    <span class="emotion-label">Fear</span>
+                                    <div class="emotion-bar">
+                                        <div class="emotion-fill fear" id="fearBar" style="width: 0%"></div>
+                                    </div>
+                                    <span class="emotion-value" id="fearValue">0%</span>
+                                </div>
+                                <div class="emotion-item">
+                                    <span class="emotion-icon">😢</span>
+                                    <span class="emotion-label">Sadness</span>
+                                    <div class="emotion-bar">
+                                        <div class="emotion-fill sadness" id="sadnessBar" style="width: 0%"></div>
+                                    </div>
+                                    <span class="emotion-value" id="sadnessValue">0%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity Log Card -->
+                    <div class="dashboard-card wide">
+                        <div class="card-header">
+                            <h3 class="card-title">Activity Log</h3>
+                            <button id="clearLog" class="clear-btn">Clear</button>
+                        </div>
+                        <div class="card-body">
+                            <div id="activityLog" class="activity-log">
+                                <div class="log-item">
+                                    <span class="log-time">--:--:--</span>
+                                    <span class="log-message">System initialized. Ready to analyze.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- CS Department Introduction -->
+        <section class="cs-department-section">
+            <div class="container">
+                <div class="department-intro">
+                    <h2 class="section-title">About the Department of Computer Science</h2>
+                    <div class="intro-content">
+                        <p>
+                            The Department of Computer Science at the University of Layyah stands as a beacon of
+                            technological innovation and academic excellence in the region. Established with a vision to
+                            nurture the next generation of tech leaders, our department combines cutting-edge curriculum
+                            with hands-on research opportunities.
+                        </p>
+                        <p>
+                            Our faculty comprises distinguished researchers and industry experts who are committed to
+                            fostering critical thinking, problem-solving skills, and innovation. We offer comprehensive
+                            programs in artificial intelligence, machine learning, data science, cybersecurity, and
+                            software engineering, preparing students for the rapidly evolving digital landscape.
+                        </p>
+                        <p>
+                            Through state-of-the-art laboratories, industry partnerships, and collaborative research
+                            projects like Sentilytics, we empower students to transform theoretical knowledge into
+                            practical solutions that address real-world challenges. Our graduates have gone on to make
+                            significant contributions in leading tech companies, research institutions, and
+                            entrepreneurial ventures worldwide.
+                        </p>
+                        <div class="department-stats">
+                            <div class="stat-box">
+                                <div class="stat-number">500+</div>
+                                <div class="stat-label">Students</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-number">25+</div>
+                                <div class="stat-label">Faculty Members</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-number">50+</div>
+                                <div class="stat-label">Research Projects</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-number">100%</div>
+                                <div class="stat-label">Placement Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <div class="container">
+                <p>&copy; 2026 University of Layyah - Department of Computer Science</p>
+                <p>Developed by Saira Alvi | Sentilytics Project</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+pandas
+numpy
+scikit-learn
+xgboost
+fpdf
+matplotlib
+seaborn
+jinja2
+python-multipart
+python-jose[cryptography]
+passlib[bcrypt]
+sqlite3

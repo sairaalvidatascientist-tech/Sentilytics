@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroPredict — Machine Learning-Based Plant Growth Prediction</title>
+    <meta name="description"
+        content="AgroPredict: A predictive analytics platform integrating plant phenotyping, environmental monitoring, and machine learning for evidence-based agricultural forecasting.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+    <!-- Startup Pop-up -->
+    <div id="startup-popup" class="popup-overlay">
+        <div class="popup-content">
+            <p style="font-size: 0.8rem; letter-spacing: 2px; color: var(--text-light);">DEPARTMENT OF PLANT PRODUCTION
+                AND BIOTECHNOLOGY</p>
+            <h2 style="font-family: 'Playfair Display', serif;">UNIVERSITY OF LAYYAH</h2>
+            <div style="width: 50px; height: 3px; background: var(--primary-green); margin: 1.5rem auto;"></div>
+            <button class="dismiss-btn" onclick="dismissPopup()">DISMISS PLATFORM OVERVIEW</button>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-left">
+            <h1>University of Layyah</h1>
+            <p>Department of Plant Production and Biotechnology</p>
+            <p>Faculty of Agricultural Sciences and Technology (FAST)</p>
+        </div>
+        <div class="header-right">
+            <div class="contributors-panel">
+                <table class="contributors-table" id="contributors-list">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Profile</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Populated via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero reveal">
+            <h2 class="playfair">Machine Learning-Based Prediction of Plant Growth and Yield in Agricultural Systems
+            </h2>
+            <p>A predictive analytics platform integrating plant phenotyping, environmental monitoring, and machine
+                learning for evidence-based agricultural forecasting.</p>
+        </section>
+
+        <!-- Gradient Vine Transition 1 -->
+        <div class="vine-divider">
+            <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path fill="var(--secondary-green)" fill-opacity="0.1"
+                    d="M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,176C672,181,768,139,864,122.7C960,107,1056,117,1152,138.7C1248,160,1344,192,1392,208L1440,224L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z">
+                </path>
+                <path fill="var(--primary-green)" fill-opacity="0.05"
+                    d="M0,96L80,112C160,128,320,160,480,165.3C640,171,800,149,960,122.7C1120,96,1280,64,1360,48L1440,32L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z">
+                </path>
+            </svg>
+        </div>
+
+        <div class="container"
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 3rem; padding: 4rem 5%;">
+            <!-- Module 1: Data Input -->
+            <section class="module-card reveal">
+                <h3 class="playfair"><img src="https://img.icons8.com/ios/24/2d5a27/experimental-flasks.png"
+                        alt="icon" /> Data Input
+                    Panel</h3>
+                <div id="input-fields-container">
+                    <!-- Categories and fields injected here -->
+                    <div class="input-category">
+                        <h4 style="font-size: 0.9rem; color: var(--earth-brown); margin: 1rem 0 0.5rem;">Plant
+                            Phenotyping</h4>
+                        <div class="input-group">
+                            <label>Plant Height (cm)</label>
+                            <input type="number" step="0.1" placeholder="Enter height">
+                        </div>
+                        <div class="input-group">
+                            <label>Growth Stage (BBCH Scale)</label>
+                            <input type="number" placeholder="e.g. 51">
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" style="width: 100%; margin-top: 2rem; border-radius: 12px;"
+                    onclick="runPrediction()">Generate Prediction Analysis</button>
+            </section>
+
+            <!-- Module 2: ML Engine -->
+            <section class="module-card reveal">
+                <h3 class="playfair"><img src="https://img.icons8.com/ios/24/2d5a27/artificial-intelligence.png"
+                        alt="icon" /> Machine
+                    Learning Engine</h3>
+                <div class="input-group">
+                    <label>Select Predictive Algorithm</label>
+                    <select id="algorithm-select"
+                        style="padding: 1rem; border-radius: 10px; background: rgba(255,255,255,0.5);">
+                        <option value="RF">Random Forest (Recommended)</option>
+                        <option value="XGB">XGBoost</option>
+                        <option value="SVM">Support Vector Machine</option>
+                        <option value="NN">Neural Network</option>
+                    </select>
+                </div>
+                <div id="prediction-results" style="margin-top: 1.5rem; display: none;">
+                    <h4 style="font-size: 0.9rem; margin-bottom: 0.5rem;">Prediction Outputs:</h4>
+                    <ul style="font-size: 0.85rem; padding-left: 1.2rem;">
+                        <li>Predicted Height (15-day): <span id="res-height"
+                                style="color: var(--primary-green); font-weight: bold;">--</span></li>
+                        <li>Estimated Yield: <span id="res-yield"
+                                style="color: var(--primary-green); font-weight: bold;">--</span></li>
+                        <li>Model R² Score: <span id="res-r2">0.72</span></li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- Gradient Vine Transition 2 -->
+        <div class="vine-divider" style="transform: rotate(180deg);">
+            <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path fill="var(--secondary-green)" fill-opacity="0.1"
+                    d="M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,176C672,181,768,139,864,122.7C960,107,1056,117,1152,138.7C1248,160,1344,192,1392,208L1440,224L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z">
+                </path>
+            </svg>
+        </div>
+
+        <div class="container" style="padding: 4rem 5%;">
+            <!-- Module 3: Scientific Visualization -->
+            <section class="module-card reveal" style="grid-column: 1 / -1;">
+                <h3 class="playfair"><img src="https://img.icons8.com/ios/24/2d5a27/combo-chart.png" alt="icon" />
+                    Scientific
+                    Visualization Module</h3>
+                <div class="viz-container" style="height: 450px; margin: 2rem 0;">
+                    <canvas id="predictionChart"></canvas>
+                </div>
+                <div style="display: flex; gap: 1.5rem;">
+                    <button class="btn" style="background: rgba(0,0,0,0.05); flex: 1; border-radius: 12px;"
+                        onclick="updateChart('scatter')">Scatter
+                        Plot</button>
+                    <button class="btn" style="background: rgba(0,0,0,0.05); flex: 1; border-radius: 12px;"
+                        onclick="updateChart('bar')">Feature
+                        Importance</button>
+                    <button class="btn" style="background: rgba(0,0,0,0.05); flex: 1; border-radius: 12px;"
+                        onclick="updateChart('violin')">Violin
+                        Plot</button>
+                </div>
+            </section>
+
+            <!-- Module 4 & 5 Combined/Adjacent -->
+        </div>
+        <div class="container"
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 3rem; padding: 4rem 5% 8rem;">
+            <!-- Module 4: Report Generator -->
+            <section class="module-card reveal">
+                <h3 class="playfair"><img src="https://img.icons8.com/ios/24/2d5a27/export-pdf.png" alt="icon" /> Report
+                    Generator</h3>
+                <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 2rem;">Auto-generated PDF includes
+                    model performance metrics, interactive visualizations, and standard methodology summary.</p>
+                <button class="btn btn-primary" style="width: 100%; margin-bottom: 1rem; border-radius: 12px;"
+                    onclick="generateReport()">Download Full Scientific Report (PDF)</button>
+                <button class="btn"
+                    style="width: 100%; border: 1px solid var(--primary-green); color: var(--primary-green); border-radius: 12px;"
+                    onclick="exportData('csv')">Export Raw Dataset (CSV)</button>
+            </section>
+
+            <!-- Module 5: Data Sourcing -->
+            <section class="module-card reveal">
+                <h3 class="playfair"><img src="https://img.icons8.com/ios/24/2d5a27/database.png" alt="icon" /> Data
+                    Sourcing</h3>
+                <div style="font-size: 0.95rem;">
+                    <p style="margin-bottom: 0.5rem;"><strong style="color: var(--primary-green);">Field Trial
+                            Mode:</strong> Active</p>
+                    <p style="color: var(--text-light); margin-bottom: 2rem;">3-5 Varieties, 15-20 Plants/Variety,
+                        Weekly Measurements Required.</p>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <a href="https://www.arabidopsis.org" target="_blank"
+                            style="color: var(--secondary-green); text-decoration: none; font-weight: 600;">The
+                            Arabidopsis Information Resource (TAIR)</a>
+                        <a href="https://www.gramene.org" target="_blank"
+                            style="color: var(--secondary-green); text-decoration: none; font-weight: 600;">Gramene
+                            Plant Genomics</a>
+                        <a href="https://www.fao.org/gaez" target="_blank"
+                            style="color: var(--secondary-green); text-decoration: none; font-weight: 600;">FAO GAEZ
+                            Database</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <h4>AgroPredict Institutional Statement</h4>
+        <p>AgroPredict integrates plant phenotyping data, environmental monitoring variables, and machine learning
+            algorithms to enable early-stage prediction of crop growth and yield outcomes. The platform is designed to
+            support agricultural researchers, plant breeders, and data scientists at the University of Layyah in making
+            transparent, reproducible, and evidence-based decisions across crop production systems.</p>
+        <p style="margin-top: 2rem; font-size: 0.7rem;">&copy; 2026 University of Layyah | Department of Plant
+            Production and Biotechnology</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

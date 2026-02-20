@@ -1,0 +1,202 @@
+:root {
+    --primary-green: hsl(135, 45%, 25%);
+    --secondary-green: hsl(122, 39%, 49%);
+    --accent-green: hsl(88, 50%, 53%);
+    --deep-forest: hsl(140, 40%, 15%);
+    --earth-brown: hsl(14, 25%, 31%);
+    --bg-light: hsl(120, 15%, 98%);
+    --text-dark: hsl(0, 0%, 13%);
+    --text-light: hsl(0, 0%, 46%);
+    --white: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+h1,
+h2,
+h3,
+.playfair {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Luxury Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 10% 20%, rgba(45, 90, 39, 0.03) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(139, 195, 74, 0.03) 0%, transparent 40%);
+    z-index: -1;
+}
+
+/* Header Refinement */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid var(--glass-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-left h1 {
+    font-size: 1.25rem;
+    color: var(--deep-forest);
+    letter-spacing: -0.5px;
+}
+
+.header-left p {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+/* Glassmorphism Cards */
+.module-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--glass-border);
+    transition: var(--transition);
+}
+
+.module-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Vine Transitions */
+.vine-divider {
+    width: 100%;
+    height: 150px;
+    margin: -50px 0;
+    position: relative;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.vine-divider svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 4px 10px rgba(45, 90, 39, 0.1));
+}
+
+/* Hero Section */
+.hero {
+    padding: 8rem 5% 6rem;
+    text-align: center;
+    background: radial-gradient(circle at center, rgba(76, 175, 80, 0.05) 0%, transparent 70%);
+}
+
+.hero h2 {
+    font-size: 3.5rem;
+    color: var(--deep-forest);
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Animations Scroll Reveal */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Multi-step Transitions ( conceptualized as subtle staggered animation ) */
+.stagger-item {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.5s ease;
+}
+
+.stagger-item.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Buttons Refined */
+.btn {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(45, 90, 39, 0.2);
+}
+
+.btn-primary:hover {
+    background: var(--secondary-green);
+    box-shadow: 0 6px 20px rgba(45, 90, 39, 0.3);
+}
+
+/* Scientific Visualization Customization */
+.viz-container {
+    border-radius: 15px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--glass-border);
+}
+
+/* Footer Section Premium */
+footer {
+    background: var(--deep-forest);
+    padding: 6rem 5% 4rem;
+    border-top: 5px solid var(--secondary-green);
+}
+
+footer h4 {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+/* Pop-up Soft Refinement */
+.popup-content {
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    padding: 4rem;
+    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.9);
+}

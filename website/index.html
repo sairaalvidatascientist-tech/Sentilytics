@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentilytics | University of Layyah</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- 1. Startup Popup -->
+    <div id="startup-popup" class="popup-overlay">
+        <div class="popup-content glass-card">
+            <h2 class="university-title">UNIVERSITY OF LAYYAH</h2>
+            <h3 class="dept-title">DEPARTMENT OF COMPUTER SCIENCE</h3>
+
+            <div class="popup-body">
+                <h1 class="project-name">Sentilytics</h1>
+                <p class="project-tagline">Real-Time Social Media Sentiment Intelligence Platform</p>
+                <div class="loader-bar"></div>
+            </div>
+
+            <div class="popup-footer">
+                <div class="developer-badge-top-right"
+                    style="position: absolute; top: 20px; right: 20px; text-align: right;">
+                    <div style="font-weight: bold; color: var(--primary-color);">Saira Alvi</div>
+                    <div style="font-size: 0.8em; color: var(--text-muted);">Web Developer</div>
+                </div>
+                <div class="developer-credit">
+                    <span class="dev-name">Saira Alvi</span>
+                    <span class="dev-role">Web Developer</span>
+                </div>
+                <button id="enter-btn" class="btn-premium">Initialize System</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div id="app-container" class="dashboard-hidden">
+
+        <!-- Header -->
+        <header class="glass-header">
+            <div class="logo-section">
+                <div class="brand-icon">
+                    <i data-lucide="activity"></i>
+                </div>
+                <div class="header-text">
+                    <h3>Sentilytics</h3>
+                    <small>Real-Time Intelligence</small>
+                </div>
+            </div>
+            <div class="header-controls">
+                <div class="developer-badge-header" style="text-align: right; margin-right: 20px;">
+                    <div style="font-weight: bold; color: var(--primary-color);">Saira Alvi</div>
+                    <div
+                        style="font-size: 0.7em; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
+                        Web Developer</div>
+                </div>
+                <div class="status-indicator">
+                    <span class="status-dot pulse-green"></span>
+                    Live Stream Active
+                </div>
+                <button id="theme-toggle" class="btn-icon">
+                    <i data-lucide="moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <main class="container">
+            <!-- Hero Section -->
+            <section class="hero-section fade-in">
+                <h1>Social Sentiment <span class="gradient-text">Intelligence</span></h1>
+                <p>Monitoring global conversations in real-time.</p>
+            </section>
+
+            <!-- Real-Time Pulse Cards -->
+            <section class="pulse-grid fade-in delay-1">
+                <div class="kpi-card glass-card">
+                    <div class="kpi-header">
+                        <small>Total Analyzed Posts</small>
+                        <i data-lucide="message-square" class="icon-muted"></i>
+                    </div>
+                    <div class="kpi-value" id="kpi-volume">1,245,892</div>
+                    <div class="kpi-trend positive">
+                        <i data-lucide="trending-up"></i> +12% this hour
+                    </div>
+                </div>
+
+                <div class="kpi-card glass-card">
+                    <div class="kpi-header">
+                        <small>Positive Sentiment</small>
+                        <i data-lucide="smile" class="icon-muted"></i>
+                    </div>
+                    <div class="kpi-value text-green" id="kpi-positive">68%</div>
+                    <div class="kpi-pulse-bar green-bar"></div>
+                </div>
+
+                <div class="kpi-card glass-card">
+                    <div class="kpi-header">
+                        <small>Negative Sentiment</small>
+                        <i data-lucide="frown" class="icon-muted"></i>
+                    </div>
+                    <div class="kpi-value text-red" id="kpi-negative">14%</div>
+                    <div class="kpi-pulse-bar red-bar"></div>
+                </div>
+
+                <div class="kpi-card glass-card">
+                    <div class="kpi-header">
+                        <small>Crisis Alert Level</small>
+                        <i data-lucide="alert-triangle" class="icon-muted"></i>
+                    </div>
+                    <div class="kpi-value text-blue" id="kpi-alert">Low</div>
+                    <div class="kpi-status">Stable</div>
+                </div>
+            </section>
+
+            <!-- Main Charts Row -->
+            <section class="charts-section fade-in delay-2">
+                <div class="chart-card glass-card big-chart">
+                    <div class="card-header">
+                        <h3>Sentiment Trend (Live)</h3>
+                        <div class="live-badge">LIVE</div>
+                    </div>
+                    <canvas id="trendChart"></canvas>
+                </div>
+
+                <div class="side-panel">
+                    <div class="chart-card glass-card small-chart">
+                        <h3>Emotion Breakdown</h3>
+                        <canvas id="emotionChart"></canvas>
+                    </div>
+
+                    <div class="chart-card glass-card small-chart">
+                        <h3>Competitor Share</h3>
+                        <canvas id="competitorChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Intro Section (Footer) -->
+            <section class="ai-intro-section fade-in delay-3">
+                <div class="glass-card ai-card">
+                    <div class="ai-badge">
+                        <i data-lucide="bot"></i> AI Generated Insight
+                    </div>
+                    <h2>University of Layyah - CS Department</h2>
+                    <p class="ai-text">
+                        The Department of Computer Science at the University of Layyah stands at the forefront of
+                        digital innovation.
+                        Dedicated to fostering excellence in Artificial Intelligence, Data Science, and Software
+                        Engineering,
+                        the department empowers students like <strong>Saira Alvi</strong> to build next-generation
+                        solutions like Sentilytics.
+                        By bridging the gap between theoretical foundations and real-time application, we are shaping
+                        the future of technology in Pakistan.
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="glass-footer">
+            <p>© 2026 University of Layyah. Developed by Saira Alvi.</p>
+        </footer>
+
+    </div>
+
+    <!-- Hidden Crisis Banner (Simulated) -->
+    <div id="crisis-banner" class="crisis-banner hidden">
+        <div class="crisis-content">
+            <i data-lucide="alert-octagon"></i>
+            <span><strong>CRITICAL ALERT:</strong> Negative sentiment spike detected (-27%) in the last 10
+                minutes.</span>
+        </div>
+        <button class="close-banner"><i data-lucide="x"></i></button>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
