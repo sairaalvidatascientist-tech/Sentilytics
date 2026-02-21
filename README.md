@@ -55,7 +55,7 @@ Sentilytics is a comprehensive sentiment analysis platform developed within the 
 ```bash
 python sentilytics/run.py
 ```
-Access at: [http://localhost:8000](http://localhost:8000)
+Access at:[https://sentilyticstech.vercel.app/]
 
 #### 2. Streamlit Dashboard (Interactive Version)
 ```bash
