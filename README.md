@@ -62,7 +62,7 @@ Access at:[https://sentilyticstech.vercel.app/]
 cd sentilytics-app
 streamlit run app.py
 ```
-Access at: [http://localhost:8501](http://localhost:8501)
+Access at: [https://sentilyticstech.vercel.app/]
 
 ---
 
